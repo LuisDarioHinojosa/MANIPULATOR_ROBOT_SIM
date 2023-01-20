@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+
+<robot name="manipulator">
+
+    <link name="world"/>
+
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.05" radius="0.2"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0 0 0 1"/>
+            </material>
+            <origin rpy="0 0 0" xyz="0 0 0.025"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.05" radius="0.2"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.025"/>
+        </collision>
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0.025"/>
+            <mass value="5.0"/>
+            <inertia ixx="0.051042" ixy="0.0" ixz="0.0" iyy="0.051042" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <joint name="fixed" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <dynamics damping="10" friction="1.0"/>
+    </joint>
+
+    <link name="link_1">
+        <visual>
+            <geometry>
+                <cylinder length="0.5" radius="0.08"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 0.8 1"/>
+            </material>
+            <origin rpy="0 0 0" xyz="0 0 0.25"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <cylinder length="0.5" radius="0.08"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.25"/>
+        </collision>
+        
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0.25"/>
+            <mass value="5.0"/>
+            <inertia ixx="0.112167" ixy="0.0" ixz="0.0" iyy="0.112167" iyz="0.0" izz="0.016"/>
+        </inertial>
+
+    </link>
+    
+    <joint name="joint_1" type="continuous">
+        <axis xyz="0 0 1"/>
+        <parent link="base_link"/>
+        <child link="link_1"/>
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.05"/>
+        <dynamics damping="10" friction="1.0"/>
+    </joint>
+
+    <link name="link_2">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0.0"/>
+            <mass value="2.0"/>
+            <inertia ixx="0.004867" ixy="0.0" ixz="0.0" iyy="0.004867" iyz="0.0" izz="0.006400"/>
+        </inertial>
+
+        <visual>
+            <geometry>
+                <cylinder length="0.1" radius="0.08"/>
+            </geometry>
+            <material name="Red">
+                <color rgba="1 0 0 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <geometry>
+                <cylinder length="0.1" radius="0.08"/>
+            </geometry>
+        </collision>
+
+    </link>
+
+    <!-- Fixed Actuator (Colission required)-->
+    <joint name="joint_2" type="revolute">
+        <axis xyz="0 0 1"/>
+        <parent link="link_1"/>
+        <child link="link_2"/>
+        <origin rpy="0 1.5708 0" xyz="0.0 -0.005 0.58"/>
+        <limit lower="-0.12" upper="3.34" effort="10" velocity="0.5"/>
+        <dynamics damping="10" friction="1.0"/>
+    </joint>
+
+    <link name="link_3">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0.0"/>
+            <mass value="0.01"/>
+            <inertia ixx="0.000140" ixy="0.0" ixz="0.0" iyy="0.000140" iyz="0.0" izz="0.000013"/>
+        </inertial>
+        
+        <visual>
+            <geometry>
+                <cylinder length="0.4" radius="0.05"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0.5 0.5 0.5 1"/>
+            </material>
+            <!-- <origin rpy="0 0 0" xyz="0 0 0.2"/> -->
+        </visual>
+
+            <collision>
+                <geometry>
+                    <cylinder length="0.4" radius="0.05"/>
+                </geometry>
+            </collision>
+    </link>
+
+    <joint name="joint_3" type="fixed">
+        <parent link="link_2"/>
+        <child link="link_3"/>
+        <origin rpy="1.57 0 0" xyz="0.0 0.2 0 "/>
+        <dynamics damping="10" friction="1.0"/>
+    </joint>
+
+    <link name="link_4">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0.0"/>
+            <mass value="0.01"/>
+            <inertia ixx="0.000017" ixy="0.0" ixz="0.0" iyy="0.000017" iyz="0.0" izz="0.000018"/>
+        </inertial>
+
+        <visual>
+            <geometry>
+                <cylinder length="0.1" radius="0.06"/>
+            </geometry>
+            <material name="Red">
+                <color rgba="1 0 0 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <geometry>
+                <cylinder length="0.1" radius="0.06"/>
+            </geometry>
+        </collision>
+
+    </link>
+
+    <!-- Second Colision Actuator -->
+    <joint name="joint_4" type="revolute">
+        <parent link="link_3"/>
+        <child link="link_4"/>
+        <origin rpy="1.57 0 0" xyz=" 0 0 -0.25"/>
+        <axis xyz=" 0 0 1"/>
+        <limit lower="-1.9" upper="1.9" effort="10" velocity="0.5"/>
+        <dynamics damping="10" friction="1.0"/>
+    </joint>
+
+
+
+
+    <link name="link_5">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0.0"/>
+            <mass value="0.01"/>
+            <inertia ixx="0.000077" ixy="0.0" ixz="0.0" iyy="0.000077" iyz="0.0" izz="0.000005"/>
+        </inertial>
+        
+        <visual>
+            <geometry>
+                <cylinder length="0.3" radius="0.03"/>
+            </geometry>
+            <material name="yellow">
+                <color rgba="0 1 0.5 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <geometry>
+                <cylinder length="0.3" radius="0.03"/>
+            </geometry>
+            <dynamics damping="0.0" friction="0.0"/>
+        
+        </collision>
+    </link>
+
+    <joint name="joint_5" type="fixed">
+        <parent link="link_4"/>
+        <child link="link_5"/>
+        <origin rpy="1.57 0 0" xyz="0.0 -0.2 0 "/>
+        <dynamics damping="10" friction="1.0"/>
+    </joint>
+
+
+    <!-- Gazebo colors -->
+    <gazebo reference="base_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="link_1">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="link_3">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="link_2">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo reference="link_4">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo reference="link_5">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+</robot>
