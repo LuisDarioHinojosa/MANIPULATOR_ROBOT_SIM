@@ -209,23 +209,71 @@
     </gazebo>
 
     <gazebo reference="link_1">
-        <material>Gazebo/Orange</material>
+        <material>Gazebo/Red</material>
     </gazebo>
 
     <gazebo reference="link_3">
-        <material>Gazebo/Orange</material>
+        <material>Gazebo/Red</material>
     </gazebo>
 
     <gazebo reference="link_2">
-        <material>Gazebo/Red</material>
+        <material>Gazebo/Blue</material>
     </gazebo>
 
     <gazebo reference="link_4">
-        <material>Gazebo/Red</material>
+        <material>Gazebo/Blue</material>
     </gazebo>
 
     <gazebo reference="link_5">
-        <material>Gazebo/Orange</material>
+        <material>Gazebo/Red</material>
     </gazebo>
+
+
+
+
+    <!-- ROS2 CONTROLLER PARAMETERS -->
+
+    <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+          <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+          <parameters>/ros2_ws/src/manipulator_simulation/config/jtc.yaml</parameters>
+        </plugin>
+    </gazebo>
+      
+      
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+    
+        <!-- Set the Joints that are actuated with the parameters-->
+      
+        <joint name="joint_1">
+            <command_interface name="position">
+                <param name="min">-3.14</param>
+                <param name="max">3.14</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <param name="initial_position">0.0</param>  
+        </joint>
+        <joint name="joint_2">
+            <command_interface name="position">
+                <param name="min">-3.14</param>
+                <param name="max">3.14</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <param name="initial_position">-1.57</param>  
+        </joint>
+        <joint name="joint_4">
+            <command_interface name="position">
+                <param name="min">-3.14</param>
+                <param name="max">3.14</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <param name="initial_position">0.0</param>  
+        </joint>
+      
+    </ros2_control>
+    
 
 </robot>
