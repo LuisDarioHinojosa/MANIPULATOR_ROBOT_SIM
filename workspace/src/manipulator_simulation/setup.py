@@ -23,6 +23,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            "publish_target = manipulator_simulation.ControllerComms:main"
         ],
     },
 )
