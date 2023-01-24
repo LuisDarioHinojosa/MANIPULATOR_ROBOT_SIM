@@ -239,35 +239,36 @@
           <parameters>/ros2_ws/src/manipulator_simulation/config/jtc.yaml</parameters>
         </plugin>
     </gazebo>
-      
+    
       
     <ros2_control name="GazeboSystem" type="system">
         <hardware>
             <plugin>gazebo_ros2_control/GazeboSystem</plugin>
         </hardware>
     
-        <!-- Set the Joints that are actuated with the parameters-->
-      
+    
         <joint name="joint_1">
             <command_interface name="position">
-                <param name="min">-3.14</param>
-                <param name="max">3.14</param>
+            <param name="min">-3.14</param>
+            <param name="max">3.14</param>
             </command_interface>
             <state_interface name="position"/>
             <param name="initial_position">0.0</param>  
         </joint>
+
         <joint name="joint_2">
             <command_interface name="position">
-                <param name="min">-3.14</param>
-                <param name="max">3.14</param>
+            <param name="min">-3.14</param>
+            <param name="max">3.14</param>
             </command_interface>
             <state_interface name="position"/>
             <param name="initial_position">-1.57</param>  
         </joint>
+
         <joint name="joint_4">
             <command_interface name="position">
-                <param name="min">-3.14</param>
-                <param name="max">3.14</param>
+            <param name="min">-3.14</param>
+            <param name="max">3.14</param>
             </command_interface>
             <state_interface name="position"/>
             <param name="initial_position">0.0</param>  
