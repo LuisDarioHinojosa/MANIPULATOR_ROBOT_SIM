@@ -52,7 +52,7 @@ def generate_launch_description():
     ld.add_action(gazebo_node)
     ld.add_action(state_pub_node)
     ld.add_action(controller_manager)
-    #ld.add_action(joint_state_controller)
-    #ld.add_action(joint_trayectory_controller)
+    ld.add_action(joint_state_controller)
+    ld.add_action(joint_trayectory_controller)
 
     return ld
