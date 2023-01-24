@@ -7,9 +7,17 @@ It is a simple manipulator robot with a forward kinematics controller buildt in 
 ```
 ./docker_run.sh
 ```
+#### IMPORTANT NOTE
+The ROS2 ControllerManager breaks two important scripts when the dependency is installed from package inside a docker container image. This can be solved by running ```./fix_controller.sh``` in addition to the normal ros source (```source install/setup.bash```)
+
 ### Spawn additional terminals
 ```
 docker exec -it ros2_container bash
+```
+### Start the Controller:
+```
+ros2 launch manipulator_bringup manipulator_controller_bringup.launch.py 
+
 ```
 ### Publish a joint's desired position
 Substitute with desired position for each actuator joint:
