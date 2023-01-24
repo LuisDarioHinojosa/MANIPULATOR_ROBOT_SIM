@@ -1,0 +1,5 @@
+float32 joint_1_target
+float32 joint_2_target
+float32 joint_4_target
+---
+bool response

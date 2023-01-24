@@ -46,6 +46,8 @@ def generate_launch_description():
     # spawn the trayectory controller
     joint_trayectory_controller = Node(package="controller_manager",executable="spawner.py",arguments=["joint_trajectory_controller", "-c", "/controller_manager"])
 
+    # call my forward kinematics service node
+    forward_kinematics_service = Node(package="manipulator_simulation",executable="publish_target")
 
     # add nodes
     ld.add_action(gazebo_cmd)
@@ -54,5 +56,5 @@ def generate_launch_description():
     ld.add_action(controller_manager)
     ld.add_action(joint_state_controller)
     ld.add_action(joint_trayectory_controller)
-
+    ld.add_action(forward_kinematics_service)
     return ld
